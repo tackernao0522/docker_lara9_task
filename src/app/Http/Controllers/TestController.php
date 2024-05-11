@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Test;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TestController extends Controller
 {
     public function index()
     {
+        // Eloquent (エロくアント)
         $values = Test::all();
 
         $count = Test::count();
@@ -17,7 +19,11 @@ class TestController extends Controller
 
         $whereBBB = Test::where('text', '=', 'bbb')->get();
 
-        dd($values, $count, $first, $whereBBB);
+        // クエリビルダ
+        $queryBuilder = DB::table('tests')->where('text', '=', 'bbb')
+            ->select('id', 'text')->get();
+
+        dd($values, $count, $first, $whereBBB, $queryBuilder);
 
 
         // dd($values);
