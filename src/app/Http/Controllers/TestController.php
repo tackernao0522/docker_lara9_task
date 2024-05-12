@@ -10,7 +10,9 @@ class TestController extends Controller
 {
     public function index()
     {
-        // Eloquent (エロくアント)
+        dd('test');
+
+        // Eloquent (エロクアント)
         $values = Test::all();
 
         $count = Test::count();
@@ -24,9 +26,6 @@ class TestController extends Controller
             ->select('id', 'text')->get();
 
         dd($values, $count, $first, $whereBBB, $queryBuilder);
-
-
-        // dd($values);
 
         return view('tests.test', compact('values'));
     }
