@@ -4,6 +4,9 @@ services:
     volumes:
       - ./src:/data
 
+    ports:
+      - 5173:5173
+
   web:
     image: nginx:1.20-alpine
     ports:
