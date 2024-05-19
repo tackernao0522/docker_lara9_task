@@ -33,9 +33,19 @@ class ContactFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, ContactForm $contactForm)
+    public function store(Request $request)
     {
-        dd($request, $request->name);
+        ContactForm::create([
+            'name' => $request->name,
+            'title' => $request->title,
+            'email' => $request->email,
+            'url' => $request->url,
+            'gender' => $request->gender,
+            'age' => $request->age,
+            'contact' => $request->contact,
+        ]);
+
+        return to_route('contacts.index');
     }
 
     /**
