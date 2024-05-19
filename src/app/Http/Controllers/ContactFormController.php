@@ -103,7 +103,9 @@ class ContactFormController extends Controller
      */
     public function edit($id)
     {
-        //
+        $contact = ContactForm::findOrFail($id);
+
+        return view('contacts.edit', compact('contact'));
     }
 
     /**
