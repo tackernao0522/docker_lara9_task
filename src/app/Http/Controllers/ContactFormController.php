@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreContactRequest;
+use App\Http\Requests\UpdateContactRequest;
 use App\Models\ContactForm;
+use App\Services\CheckFormService;
 use Illuminate\Http\Request;
 
 class ContactFormController extends Controller
@@ -42,7 +45,7 @@ class ContactFormController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreContactRequest $request)
     {
         ContactForm::create([
             'name' => $request->name,
@@ -67,30 +70,9 @@ class ContactFormController extends Controller
     {
         $contact = ContactForm::findOrFail($id);
 
-        if ($contact->gender === 0) {
-            $gender = '男性';
-        } else {
-            $gender = '女性';
-        }
+        $gender = CheckFormService::checkGender($contact);
 
-        if ($contact->age === 1) {
-            $age = '〜19歳';
-        }
-        if ($contact->age === 2) {
-            $age = '20歳〜29歳';
-        }
-        if ($contact->age === 3) {
-            $age = '30歳〜39歳';
-        }
-        if ($contact->age === 4) {
-            $age = '40歳〜49歳';
-        }
-        if ($contact->age === 5) {
-            $age = '50歳〜59歳';
-        }
-        if ($contact->age === 6) {
-            $age = '60歳〜';
-        }
+        $age = CheckFormService::checkAge($contact);
 
         return view('contacts.show', compact('contact', 'gender', 'age'));
     }
@@ -115,7 +97,7 @@ class ContactFormController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateContactRequest $request, $id)
     {
         $contact = ContactForm::findOrFail($id);
         $contact->name = $request->name;
