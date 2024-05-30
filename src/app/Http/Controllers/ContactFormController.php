@@ -138,6 +138,8 @@ class ContactFormController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ContactForm::findOrFail($id)->delete();
+
+        return to_route('contacts.index');
     }
 }
