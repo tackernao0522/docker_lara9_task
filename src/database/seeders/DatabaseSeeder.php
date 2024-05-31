@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             TestsTableSeeder::class,
+            AreaTablesSeeder::class,
+            ShopTablesSeeder::class,
         ]);
 
         ContactForm::factory(100)->create();
