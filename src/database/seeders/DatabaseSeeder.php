@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             TestsTableSeeder::class,
             AreaTablesSeeder::class,
             ShopTablesSeeder::class,
+            RouteTablesSeeder::class,
+            RouteShopTableSeeder::class,
         ]);
 
         ContactForm::factory(100)->create();

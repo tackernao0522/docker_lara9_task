@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('routes', function (Blueprint $table) {
-            $table->id();
-            $table->string('name', 20);
-            $table->integer('sort_no');
-            $table->timestamps();
+        Schema::create('route_shop', function (Blueprint $table) {
+            $table->foreignId('route_id')->constrained();
+            $table->foreignId('shop_id')->constrained();
+            $table->primary(['route_id', 'shop_id']);
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('routes');
+        Schema::dropIfExists('route_shop');
     }
 };
