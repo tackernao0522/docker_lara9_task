@@ -22,7 +22,7 @@ class ContactFormController extends Controller
             'name',
             'title',
             'created_at',
-        )->get();
+        )->paginate(20);
 
         // dd($contacts);
 
